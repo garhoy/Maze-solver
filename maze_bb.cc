@@ -1,3 +1,4 @@
+// ANDER GARCÍA HOYBERG , 48827554A
 #include <stdlib.h>
 #include <fstream>
 #include <vector>
@@ -293,66 +294,67 @@ int min_neighbour(vector<vector<long int>> &visited, int x, int y)
 
 void maze_p2D_p(vector<vector<long int>> &visited, vector<int> &best_directions, vector<vector<int>> &maze, vector<bool> &parameters)
 {
+    
+    int i = visited.size() - 1, j = visited[0].size() - 1;
+    vector<vector<long int>> aux = visited;
+    visited[i][j] = -1;
+    while (true)
+    {
+        int min_direction = min_neighbour(aux, i, j);
+        if (i == 0 && j == 0)
+            break;
+        // Where i come from
+        switch (min_direction)
+        {
+        case 1:
+            i--;
+
+            best_directions.push_back(5); // From North
+            break;
+        case 2:
+            i--;
+            j++;
+
+            best_directions.push_back(6); // From North East
+            break;
+        case 3:
+            j++;
+
+            best_directions.push_back(7); // From East
+            break;
+        case 4:
+            i++;
+            j++;
+
+            best_directions.push_back(8); // From South East
+            break;
+        case 5:
+            i++;
+
+            best_directions.push_back(1); // From South
+            break;
+        case 6:
+            i++;
+            j--;
+
+            best_directions.push_back(2); // From South West
+            break;
+        case 7:
+            j--;
+
+            best_directions.push_back(3); // From West
+            break;
+        case 8:
+            j--;
+            i--;
+            best_directions.push_back(4); // From North West
+            break;
+        }
+        visited[i][j] = -1;
+    }
+
     if (parameters[1] && !no_exit)
     {
-        int i = visited.size() - 1, j = visited[0].size() - 1;
-        vector<vector<long int>> aux = visited;
-        visited[i][j] = -1;
-        while (true)
-        {
-            int min_direction = min_neighbour(aux, i, j);
-            if (i == 0 && j == 0)
-                break;
-            // Where i come from
-            switch (min_direction)
-            {
-            case 1:
-                i--;
-
-                best_directions.push_back(5); // From North
-                break;
-            case 2:
-                i--;
-                j++;
-
-                best_directions.push_back(6); // From North East
-                break;
-            case 3:
-                j++;
-
-                best_directions.push_back(7); // From East
-                break;
-            case 4:
-                i++;
-                j++;
-
-                best_directions.push_back(8); // From South East
-                break;
-            case 5:
-                i++;
-
-                best_directions.push_back(1); // From South
-                break;
-            case 6:
-                i++;
-                j--;
-
-                best_directions.push_back(2); // From South West
-                break;
-            case 7:
-                j--;
-
-                best_directions.push_back(3); // From West
-                break;
-            case 8:
-                j--;
-                i--;
-                best_directions.push_back(4); // From North West
-                break;
-            }
-            visited[i][j] = -1;
-        }
-
         // Printing shortest Path
         for (int i = 0; i < int(visited.size()); i++)
         {
@@ -509,4 +511,3 @@ int main(int argc, char **argv)
 
     return 0;
 }
-
