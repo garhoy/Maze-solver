@@ -1,4 +1,3 @@
-// ANDER GARCÍA HOYBERG , 48827554A
 #include <stdlib.h>
 #include <fstream>
 #include <vector>
@@ -301,6 +300,11 @@ void maze_p2D_p(vector<vector<long int>> &visited, vector<int> &best_directions,
     while (true)
     {
         int min_direction = min_neighbour(aux, i, j);
+
+        if(min_direction == -1)
+        {
+            break;
+        }
         if (i == 0 && j == 0)
             break;
         // Where i come from
@@ -387,7 +391,7 @@ void maze_p2D_p(vector<vector<long int>> &visited, vector<int> &best_directions,
         }
         cout << ">" << endl;
     }
-    else if (!parameters[0])
+    else if (!parameters[0] && !no_exit)
     {
         cout << "<>" << endl;
     }
